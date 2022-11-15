@@ -2,11 +2,14 @@ import express from 'express'
 import csv from 'csvtojson'
 import {promises as fsPromises} from 'fs'; 
 const routes = require("./routes/index")
-const handleImgSize = require ("./utilities/middlewares/handleImgSize")
+// const handleImgSize = require ("./utilities/middlewares/handleImgSize")
 
 const app = express()
-app.use(handleImgSize)
+// app.use(handleImgSize)
 app.use('/api', routes)
+app.use(express.static('public')); 
+app.use('/images', express.static('images'));
+
 
 const inputFile = './users.csv'
 const outputFile = 'users.json'

@@ -1,0 +1,13 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var routes = require("./routes/index");
+var logger = require("./utilities/middlewares/logger");
+var app = (0, express_1.default)();
+app.use(logger);
+app.use('/api', routes);
+var PORT = 3000;
+app.listen(PORT, function () { return console.log("Server is Successfully Running, and App is listening on port " + PORT); });

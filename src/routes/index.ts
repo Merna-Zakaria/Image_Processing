@@ -1,11 +1,11 @@
 import express from 'express'
-import imgProcessing from './api/imgProcessing'
+import images from './api/images';
 const routes = express.Router();
 
 routes.get('/', (req, res) => { 
   res.send('main router')
 });
 
-routes.use('/images', imgProcessing)
+routes.use('/images', images)
 
 module.exports = routes;

@@ -1,36 +1,10 @@
 import express from 'express'
-import csv from 'csvtojson'
-import {promises as fsPromises} from 'fs'; 
 const routes = require("./routes/index")
-// const handleImgSize = require ("./utilities/middlewares/handleImgSize")
+const resizeImage = require ("./utilities/middlewares/resizeImage")
 
 const app = express()
-// app.use(handleImgSize)
+app.use(resizeImage)
 app.use('/api', routes)
-app.use(express.static('public')); 
-app.use('/images', express.static('images'));
-
-
-const inputFile = './users.csv'
-const outputFile = 'users.json'
-
-app.get('/convert', (req, res) => { 
-    res.send('converting is processing')
-    csv().fromFile(inputFile).then(data => {
-        let newData = data.map((item: {
-            first_name:string, last_name:string, phone: string
-        }) => {
-            let first = item.first_name
-            let last = item.last_name
-            let phone = item.phone
-            if(item.phone === ''){
-                item.phone='missing data'
-            }
-            return {first, last, phone}
-        })
-        fsPromises.writeFile(outputFile, JSON.stringify(newData))
-    })
-  });
 
 const PORT = 3000;
   

@@ -10,4 +10,5 @@ var app = (0, express_1.default)();
 app.use(resizeImage);
 app.use('/api', routes);
 var PORT = 3000;
-app.listen(PORT, function () { return console.log("Server is Successfully Running, and App is listening on port " + PORT); });
+var server = app.listen(PORT, function () { return console.log("Server is Successfully Running, and App is listening on port " + PORT); });
+module.exports = server;

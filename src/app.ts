@@ -8,7 +8,8 @@ app.use('/api', routes)
 
 const PORT = 3000;
   
-app.listen(PORT, () =>  console.log("Server is Successfully Running, and App is listening on port "+ PORT))
+const server = app.listen(PORT, () =>  console.log("Server is Successfully Running, and App is listening on port "+ PORT))
+module.exports = server;
 
 
 

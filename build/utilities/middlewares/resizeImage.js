@@ -44,19 +44,21 @@ function resizeImage(req, res, next) {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    _b.trys.push([0, 2, , 3]);
+                    _b.trys.push([0, 3, , 4]);
                     _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
+                    if (!filename) return [3 /*break*/, 2];
                     return [4 /*yield*/, sharp(path.normalize("src/assets/images/".concat(filename, ".jpg")))
                             .resize({ width: parseInt(width), height: parseInt(height) })
                             .toFile("src/assets/imagesProcessed/".concat(filename, "-").concat(width, "x").concat(height, ".jpg"))];
                 case 1:
                     _b.sent();
-                    return [3 /*break*/, 3];
-                case 2:
+                    _b.label = 2;
+                case 2: return [3 /*break*/, 4];
+                case 3:
                     error_1 = _b.sent();
                     console.log(error_1);
-                    return [3 /*break*/, 3];
-                case 3:
+                    return [3 /*break*/, 4];
+                case 4:
                     next();
                     return [2 /*return*/];
             }

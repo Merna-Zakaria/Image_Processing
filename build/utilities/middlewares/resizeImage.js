@@ -35,34 +35,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var sharp = require('sharp');
-var path = require('path');
-function resizeImage(req, res, next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _a, filename, width, height, error_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _b.trys.push([0, 3, , 4]);
-                    _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
-                    if (!filename) return [3 /*break*/, 2];
-                    return [4 /*yield*/, sharp(path.normalize("src/assets/images/".concat(filename, ".jpg")))
-                            .resize({ width: parseInt(width), height: parseInt(height) })
-                            .toFile("src/assets/imagesProcessed/".concat(filename, "-").concat(width, "x").concat(height, ".jpg"))];
-                case 1:
-                    _b.sent();
-                    _b.label = 2;
-                case 2: return [3 /*break*/, 4];
-                case 3:
-                    error_1 = _b.sent();
-                    console.log(error_1);
-                    return [3 /*break*/, 4];
-                case 4:
-                    next();
-                    return [2 /*return*/];
-            }
-        });
+var sharp_1 = __importDefault(require("sharp"));
+var path = require("path");
+var resizeImage = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, filename, width, height, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 3, , 4]);
+                _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
+                if (!filename) return [3 /*break*/, 2];
+                return [4 /*yield*/, (0, sharp_1.default)(path.normalize("src/assets/images/".concat(filename, ".jpg")))
+                        .resize({
+                        width: parseInt(width),
+                        height: parseInt(height)
+                    })
+                        .toFile("src/assets/imagesProcessed/".concat(filename, "-").concat(width, "x").concat(height, ".jpg"))];
+            case 1:
+                _b.sent();
+                _b.label = 2;
+            case 2: return [3 /*break*/, 4];
+            case 3:
+                error_1 = _b.sent();
+                console.log(error_1);
+                return [3 /*break*/, 4];
+            case 4:
+                next();
+                return [2 /*return*/];
+        }
     });
-}
+}); };
 module.exports = resizeImage;

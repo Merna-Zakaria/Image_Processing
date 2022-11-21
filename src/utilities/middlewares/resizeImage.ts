@@ -1,6 +1,7 @@
 import express from "express";
 import sharp from "sharp";
 import path = require("path");
+import fs = require("fs")
 
 const resizeImage = async (
   req: express.Request,
@@ -9,7 +10,7 @@ const resizeImage = async (
 ) => {
   try {
     const { filename, width, height } = req.query;
-    if (filename) {
+    if (filename && !fs.existsSync(`src/assets/imagesProcessed/${filename}-${width}x${height}.jpg`)) {
       await sharp(path.normalize(`src/assets/images/${filename}.jpg`))
         .resize({
           width: parseInt(width as string) as number,

@@ -35,62 +35,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var request = require('supertest');
-describe('GET /api/images', function () {
+var request = require("supertest");
+describe("GET /api/images", function () {
     var server;
     beforeEach(function () {
-        server = require('../app');
+        server = require("../app");
     });
-    it('responds to /api', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("responds to /api", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request(server).get('/api')];
+                case 0: return [4 /*yield*/, request(server).get("/api")];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(200);
-                    expect(response.text).toBe('main router');
+                    expect(response.text).toBe("main router");
                     return [2 /*return*/];
             }
         });
     }); });
-    it('404 everything else', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("404 everything else", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request(server).get('/foo/bar').expect(404)];
+                case 0: return [4 /*yield*/, request(server).get("/foo/bar").expect(404)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should respond with image/jpeg', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should respond with image/jpeg", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request(server)
-                        .get('/api/images')
-                        .query({ filename: 'avatar', width: 100, height: 100 })];
+                        .get("/api/images")
+                        .query({ filename: "avatar", width: 100, height: 100 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(200);
-                    expect(response.type).toBe('image/jpeg');
-                    expect(response.headers['content-type']).toMatch(/jpeg/);
+                    expect(response.type).toBe("image/jpeg");
+                    expect(response.headers["content-type"]).toMatch(/jpeg/);
                     return [2 /*return*/];
             }
         });
     }); });
-    it('test image not found', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("test image not found", function () { return __awaiter(void 0, void 0, void 0, function () {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request(server)
-                        .get('/api/images')
-                        .query({ filename: '', width: 100, height: 100 })];
+                        .get("/api/images")
+                        .query({ filename: "", width: 100, height: 100 })];
                 case 1:
                     response = _a.sent();
                     expect(response.status).toEqual(404);
-                    expect(response.text).toBe('Sorry, no images found to be displayed');
+                    expect(response.text).toBe("Sorry, no images found to be displayed");
                     return [2 /*return*/];
             }
         });

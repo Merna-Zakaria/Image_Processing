@@ -18,5 +18,6 @@ and then run this command `$ npm install` or `$ yard add`to install project depe
 
 # How to Use the Project
 You should enter image name (filename) you want to disply it, this name refere to images name available in assests folder in project, then enter width & height you want. 
+
 Example: http://localhost:3000/api/images?filename=avatar&height=100&width=100
 

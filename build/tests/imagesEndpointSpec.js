@@ -89,8 +89,8 @@ describe("GET /api/images", function () {
                         .query({ filename: "", width: 100, height: 100 })];
                 case 1:
                     response = _a.sent();
-                    expect(response.status).toEqual(404);
-                    expect(response.text).toBe("Sorry, no images found to be displayed");
+                    expect(response.status).toEqual(422);
+                    expect(response.text).toBe("Please enter valid file name");
                     return [2 /*return*/];
             }
         });

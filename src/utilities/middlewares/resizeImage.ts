@@ -1,7 +1,8 @@
 import express from "express";
 import sharp from "sharp";
 import path = require("path");
-import fs = require("fs")
+import fs = require("fs");
+const shared = require("../shared");
 
 const resizeImage = async (
   req: express.Request,
@@ -10,7 +11,19 @@ const resizeImage = async (
 ) => {
   try {
     const { filename, width, height } = req.query;
-    if (filename && !fs.existsSync(`src/assets/imagesProcessed/${filename}-${width}x${height}.jpg`)) {
+    const isParamsValid = shared.handleInvalidReqParams(
+      filename as string,
+      parseInt(width as string),
+      parseInt(height as string),
+      res,
+      true
+    );
+    if (
+      isParamsValid &&
+      !fs.existsSync(
+        `src/assets/imagesProcessed/${filename}-${width}x${height}.jpg`
+      )
+    ) {
       await sharp(path.normalize(`src/assets/images/${filename}.jpg`))
         .resize({
           width: parseInt(width as string) as number,

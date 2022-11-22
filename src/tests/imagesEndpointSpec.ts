@@ -27,7 +27,7 @@ describe("GET /api/images", () => {
     const response = await request(server)
       .get("/api/images")
       .query({ filename: "", width: 100, height: 100 });
-    expect(response.status).toEqual(404);
-    expect(response.text).toBe("Sorry, no images found to be displayed");
+    expect(response.status).toEqual(422);
+    expect(response.text).toBe("Please enter valid file name");
   });
 });

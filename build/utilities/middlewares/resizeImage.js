@@ -42,14 +42,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var sharp_1 = __importDefault(require("sharp"));
 var path = require("path");
 var fs = require("fs");
+var shared = require("../shared");
 var resizeImage = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, filename, width, height, error_1;
+    var _a, filename, width, height, isParamsValid, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 3, , 4]);
                 _a = req.query, filename = _a.filename, width = _a.width, height = _a.height;
-                if (!(filename && !fs.existsSync("src/assets/imagesProcessed/".concat(filename, "-").concat(width, "x").concat(height, ".jpg")))) return [3 /*break*/, 2];
+                isParamsValid = shared.handleInvalidReqParams(filename, parseInt(width), parseInt(height), res, true);
+                if (!(isParamsValid &&
+                    !fs.existsSync("src/assets/imagesProcessed/".concat(filename, "-").concat(width, "x").concat(height, ".jpg")))) return [3 /*break*/, 2];
                 return [4 /*yield*/, (0, sharp_1.default)(path.normalize("src/assets/images/".concat(filename, ".jpg")))
                         .resize({
                         width: parseInt(width),

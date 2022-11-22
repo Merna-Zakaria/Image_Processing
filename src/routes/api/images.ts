@@ -1,12 +1,18 @@
 import express from "express";
 const fs = require("fs");
 const path = require("path");
-
+const shared = require("../../utilities/shared");
 const images = express.Router();
 
-images.get("/", (req, res) => {
+images.get("/", (req: express.Request, res: express.Response): void => {
   const { filename, width, height } = req.query;
-  if (filename) {
+  const isParamsValid = shared.handleInvalidReqParams(
+    filename as string,
+    parseInt(width as string),
+    parseInt(height as string),
+    res
+  );
+  if (isParamsValid && fs.existsSync(`src/assets/images/${filename}.jpg`)) {
     fs.readFile(
       path.normalize(
         `src/assets/imagesProcessed/${filename}-${width}x${height}.jpg`
@@ -18,8 +24,7 @@ images.get("/", (req, res) => {
       }
     );
   } else {
-    res.status(404);
-    res.send("Sorry, no images found to be displayed");
+    isParamsValid;
   }
 });
 

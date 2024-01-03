@@ -28,4 +28,29 @@ images.get("/", (req: express.Request, res: express.Response): void => {
   }
 });
 
+images.get("/resize", (req: express.Request, res: express.Response): void => {
+  const { imgUrl, width, height } = req.query;
+  
+  // const isParamsValid = shared.handleInvalidReqParams(
+  //   imgUrl as string,
+  //   parseInt(width as string),
+  //   parseInt(height as string),
+  //   res
+  // );
+  // if (isParamsValid) {
+    // fs.readFile(
+    //   path.normalize(
+    //     `src/assets/imagesProcessed/${filename}-${width}x${height}.jpg`
+    //   ),
+      (err: express.Errback, data: express.Response) => {
+        if (err) throw err; // Fail if the file can"t be read.
+        res.writeHead(200);
+        res.end(data); // Send the file data to the browser.
+      }
+    // );
+  // } else {
+  //   isParamsValid;
+  // }
+});
+
 export default images;
